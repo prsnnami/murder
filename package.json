@@ -1,0 +1,16 @@
+{
+  "name": "murder",
+  "version": "1.0.0",
+  "description": "Express app for the murder game server and pwa's for the murder game clients",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/prsnnami/murder.git"
+  },
+  "keywords": [],
+  "author": "prsnnami",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/prsnnami/murder/issues"
+  },
+  "homepage": "https://github.com/prsnnami/murder#readme"
+}

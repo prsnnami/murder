@@ -1,0 +1,17 @@
+{
+  "name": "murder-services",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "watch": "babel-watch src/index.js"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.6.2",
+    "@babel/preset-env": "^7.6.2",
+    "babel-watch": "^7.0.0"
+  },
+  "dependencies": {
+    "ip": "^1.1.5"
+  }
+}
