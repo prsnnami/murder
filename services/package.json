@@ -12,6 +12,12 @@
     "babel-watch": "^7.0.0"
   },
   "dependencies": {
-    "ip": "^1.1.5"
+    "cookie": "^0.4.0",
+    "ip": "^1.1.5",
+    "koa": "^2.8.1",
+    "koa-router": "^7.4.0",
+    "socket.io": "^2.3.0",
+    "unistore": "^3.4.1",
+    "uuid": "^3.3.3"
   }
 }
