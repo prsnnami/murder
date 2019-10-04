@@ -17,6 +17,7 @@ const router = new Router();
 const appStates = {
   SETUP: "setup",
   WAIT: "wait",
+  START: "start",
   DISCUSS: "discuss",
   VOTE: "vote",
   DEFENSE: "defence",
@@ -31,9 +32,13 @@ const server = http.createServer(app.callback());
 const io = socket(server);
 
 let store = createStore({
-  counter: 0,
   users: {},
-  appState: appStates.SETUP
+  appState: appStates.SETUP,
+  config: {
+    numberOfPlayers: null,
+    discussionTime: null,
+    defenseTime: null
+  }
 });
 
 let state = store.getState();
@@ -59,14 +64,16 @@ io.on("connection", function(client) {
     store.setState({ appState: "test" });
   });
 
-  client.on("counter_increment", function(msg) {
-    console.log("message: " + msg);
-    store.setState({ counter: state.counter + 1 });
-
-    client.emit("counter_change", state.counter);
+  client.on("setup_values", data => {
+    gameSetup(data);
   });
 });
 
 app.use(router.routes()).use(router.allowedMethods());
 
 server.listen(3000);
+
+function gameSetup(config) {
+  store.setState({ config });
+  store.setState({ appState: appStates.WAIT });
+}

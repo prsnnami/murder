@@ -1,5 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import useSocket from "./utils/useSocket";
+import SetupPage from "./SetupPage";
+
+export const AppContext = React.createContext();
 
 function App() {
   const [appState, setAppState] = useState(null);
@@ -12,6 +15,17 @@ function App() {
     }
   });
 
+  function renderRoutes() {
+    switch (appState) {
+      case "setup":
+        return <SetupPage />;
+      case "wait":
+        return <WaitPage />;
+      default:
+        return null;
+    }
+  }
+
   if (appState === null) return <h1>Loading</h1>;
 
   return (
@@ -22,24 +36,19 @@ function App() {
       <button onClick={() => socket.emit("appState_change_manual")}>
         Test
       </button>
+      <AppContext.Provider value={{ socket }}>
+        {renderRoutes()}
+      </AppContext.Provider>
     </div>
   );
 }
 
 export default App;
 
-function SetupPage() {
-  return (
-    <div>
-      <h1>This is the setup page</h1>
-    </div>
-  );
-}
-
 function WaitPage() {
   return (
     <div>
-      <h1>Waiting for players to Ready</h1>
+      <h1>Waiting for players Connect</h1>
     </div>
   );
 }
